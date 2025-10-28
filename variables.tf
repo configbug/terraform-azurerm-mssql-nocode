@@ -4,6 +4,27 @@ variable "subscription_id" {
   sensitive   = true
 }
 
+variable "client_id" {
+  description = "Client ID del Service Principal de Azure (Application ID)."
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "client_secret" {
+  description = "Client Secret del Service Principal de Azure."
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
+variable "tenant_id" {
+  description = "Tenant ID de Azure Active Directory."
+  type        = string
+  sensitive   = true
+  default     = null
+}
+
 variable "project_name" {
   description = "Nombre corto del proyecto. Se usará como prefijo en todos los recursos."
   type        = string
