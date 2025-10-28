@@ -4,6 +4,24 @@ variable "subscription_id" {
   sensitive   = true
 }
 
+variable "client_id" {
+  description = "Client ID del Service Principal de Azure (Application ID)."
+  type        = string
+  sensitive   = true
+}
+
+variable "client_secret" {
+  description = "Client Secret del Service Principal de Azure."
+  type        = string
+  sensitive   = true
+}
+
+variable "tenant_id" {
+  description = "Tenant ID de Azure Active Directory."
+  type        = string
+  sensitive   = true
+}
+
 variable "project_name" {
   description = "Nombre corto del proyecto. Se usará como prefijo en todos los recursos."
   type        = string
@@ -24,9 +42,18 @@ variable "environment" {
 }
 
 variable "location" {
-  description = "Región de Azure."
+  description = "Región de Azure donde se desplegarán los recursos. Usar regiones con disponibilidad garantizada para SQL Database."
   type        = string
-  default     = "eastus"
+  default     = "westeurope"
+
+  validation {
+    condition = contains([
+      "westeurope", "northeurope", "eastus2", "westus2", "centralus",
+      "southcentralus", "canadacentral", "brazilsouth", "australiaeast",
+      "japaneast", "koreacentral", "southeastasia", "eastasia", "uksouth"
+    ], var.location)
+    error_message = "La región debe ser una de las siguientes con disponibilidad garantizada para SQL Database: westeurope, northeurope, eastus2, westus2, centralus, southcentralus, canadacentral, brazilsouth, australiaeast, japaneast, koreacentral, southeastasia, eastasia, uksouth."
+  }
 }
 
 variable "administrator_login" {
