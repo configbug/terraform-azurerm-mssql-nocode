@@ -1,3 +1,9 @@
+variable "subscription_id" {
+  description = "ID de la suscripción de Azure donde se desplegarán los recursos."
+  type        = string
+  sensitive   = true
+}
+
 variable "project_name" {
   description = "Nombre corto del proyecto. Se usará como prefijo en todos los recursos."
   type        = string

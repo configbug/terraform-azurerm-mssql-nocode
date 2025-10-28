@@ -37,13 +37,12 @@ resource "azurerm_mssql_database" "this" {
   sku_name    = var.sku_name
   max_size_gb = var.max_size_gb
   collation   = var.collation
-  tags        = local.common_tags
-}
 
-# Política de retención corta (nuevo recurso separado en provider 4.x)
-resource "azurerm_mssql_database_short_term_retention_policy" "this" {
-  database_id    = azurerm_mssql_database.this.id
-  retention_days = var.short_term_retention_days
+  short_term_retention_policy {
+    retention_days = var.short_term_retention_days
+  }
+
+  tags = local.common_tags
 }
 
 # Firewall personalizado
